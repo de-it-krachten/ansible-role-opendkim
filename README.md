@@ -3,7 +3,7 @@
 
 # ansible-role-opendkim
 
-<basic role description>
+Install & manages OpenDKIM 
 
 
 Platforms
@@ -64,7 +64,7 @@ Example Playbook
 - name: sample playbook for role 'opendkim'
   hosts: all
   vars:
-    opendkim_domain: voorbeeld.nl
+    opendkim_domain: example.com
   tasks:
     - name: Include role 'opendkim'
       include_role:
