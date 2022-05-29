@@ -1,0 +1,20 @@
+---
+
+opendkim_private_key: /etc/opendkim/keys/dkim.private.key
+opendkim_public_key: /etc/opendkim/keys/dkim.public.key
+opendkim_domains: "{{ [ opendkim_domain ] }}"
+opendkim_key_bits: 1024
+
+opendkim_user: opendkim
+opendkim_group: opendkim
+
+opendkim_settings:
+  Mode: sv
+  Selector: key
+  ReportAddress:      '"{{ opendkim_domain }} postmaster" <postmaster@{{ opendkim_domain }}>'
+  # KeyFile:            '/etc/opendkim/keys/dkim.private.key'
+  KeyTable:           '/etc/opendkim/KeyTable'
+  SigningTable:       'refile:/etc/opendkim/SigningTable'
+  ExternalIgnoreList: 'refile:/etc/opendkim/TrustedHosts'
+  InternalHosts:      'refile:/etc/opendkim/TrustedHosts'
+  Socket:             'inet:8891@localhost'

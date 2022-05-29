@@ -1,0 +1,111 @@
+---
+
+- name: Load variables based on OS type
+  include_vars: "{{ lookup('first_found', params) }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_major_version }}.yml"
+        - "{{ ansible_distribution }}.yml"
+        - "family-{{ ansible_os_family }}-{{ ansible_distribution_major_version }}.yml"
+        - "family-{{ ansible_os_family }}.yml"
+        - default.yml
+      paths:
+        - "vars"
+
+- name: Assertions
+  assert:
+    that:
+      - opendkim_domain is defined
+
+- name: Install all packages
+  package:
+    name: "{{ opendkim_packages }}"
+    state: present
+
+- name: configure OpenDKIM setttings
+  lineinfile:
+    path: /etc/opendkim.conf
+    line: "{{ item.key }} {{ item.value }}"
+    regexp: "{{ item.key }}(\\s)+.*"
+  loop: "{{ opendkim_settings | dict2items }}"
+
+- name: Disable KeyFile
+  replace:
+    path: /etc/opendkim.conf
+    replace: "#KeyFile"
+    regexp: "^KeyFile"
+
+- name: Create /etc/opendkim/keys
+  file:
+    path: /etc/opendkim/keys
+    state: directory
+    owner: root
+    group: "{{ opendkim_group }}"
+    mode: "0750"
+  when: ansible_os_family == 'Debian'
+
+- name: Configure default for Debian
+  lineinfile:
+    path: /etc/default/opendkim
+    line: "Socket  inet:8891@localhost"
+    regexp: "Socket .*"
+    owner: "{{ opendkim_user }}"
+    group: "{{ opendkim_group }}"
+    mode: "0644"
+  when: ansible_os_family == 'Debian'
+
+- name: Setup KeyTable
+  lineinfile:
+    path: /etc/opendkim/KeyTable
+    line: "key._domainkey.{{ item }}     {{ item }}:key:{{ opendkim_private_key }}"
+    create: yes
+    owner: "{{ opendkim_user }}"
+    group: "{{ opendkim_group }}"
+    mode: "0640"
+  loop: "{{ opendkim_domains }}"
+
+- name: Setup SigningTable
+  lineinfile:
+    path: /etc/opendkim/SigningTable
+    line: "*@{{ item }} key._domainkey.{{ item }}"
+    create: yes
+    owner: "{{ opendkim_user }}"
+    group: "{{ opendkim_group }}"
+    mode: "0640"
+  loop: "{{ opendkim_domains }}"
+
+- name: Setup TrustedHosts
+  lineinfile:
+    path: /etc/opendkim/TrustedHosts
+    line: "*.{{ item }}"
+    create: yes
+    owner: "{{ opendkim_user }}"
+    group: "{{ opendkim_group }}"
+    mode: "0640"
+  loop: "{{ opendkim_domains }}"
+
+- name: Create private key
+  openssl_privatekey:
+    path: "{{ opendkim_private_key }}"
+    size: "{{ opendkim_key_bits }}"
+    owner: "{{ opendkim_user }}"
+    group: "{{ opendkim_group }}"
+
+- name: Extract public key from private key
+  openssl_publickey:
+    path: "{{ opendkim_public_key }}"
+    privatekey_path: "{{ opendkim_private_key }}"
+    owner: "{{ opendkim_user }}"
+    group: "{{ opendkim_group }}"
+
+- name: Convert public key
+  shell: |
+    set -o pipefail
+    sed "/PUBLIC/d" {{ opendkim_public_key }} | tr -d '\n'
+  changed_when: false
+  register: _pubkey
+
+- name: Display DKIM record for DNS
+  debug:
+    msg: "v=DKIM1; k=rsa; p={{ _pubkey.stdout }}"

@@ -1,0 +1,14 @@
+---
+
+# Generic
+generic:
+  role: ansible-role-opendkim
+  role_short: opendkim
+  role_description: |
+    <basic role description>
+
+molecule:
+  converge:
+    vars:
+      #opendkim_domain: example.com
+      opendkim_domain: voorbeeld.nl
