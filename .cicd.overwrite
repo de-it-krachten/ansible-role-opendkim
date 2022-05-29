@@ -7,6 +7,9 @@ generic:
   role_description: |
     Install & manages OpenDKIM 
 
+github:
+  fail_fast: false
+
 molecule:
   converge:
     vars:
