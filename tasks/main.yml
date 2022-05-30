@@ -103,6 +103,8 @@
   shell: |
     set -o pipefail
     sed "/PUBLIC/d" {{ opendkim_public_key }} | tr -d '\n'
+  args:
+    executable: /bin/bash
   changed_when: false
   register: _pubkey
 

@@ -3,7 +3,7 @@
 - name: Converge
   hosts: all
   vars:
-    opendkim_domain: voorbeeld.nl
+    opendkim_domain: example.com
   tasks:
     - name: Include role 'ansible-role-opendkim'
       include_role:
