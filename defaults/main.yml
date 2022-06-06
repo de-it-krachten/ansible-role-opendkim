@@ -26,3 +26,10 @@ opendkim_settings:
   ExternalIgnoreList: 'refile:/etc/opendkim/TrustedHosts'
   InternalHosts:      'refile:/etc/opendkim/TrustedHosts'
   Socket:             'inet:8891@localhost'
+
+opendkim_postfix_settings:
+  milter_default_action: accept
+  milter_protocol: '6'
+  smtpd_milters: 'inet:127.0.0.1:8891'
+  non_smtpd_milters: $smtpd_milters
+ 

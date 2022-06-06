@@ -1,0 +1,12 @@
+---
+
+- name: Install all packages
+  package:
+    name: "{{ opendkim_packages }}"
+    state: present
+
+- name: Enable service
+  service:
+    name: opendkim
+    state: started
+    enabled: yes

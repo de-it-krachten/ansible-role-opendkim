@@ -1,0 +1,15 @@
+---
+
+- name: Configuring postfix (main.cf)
+  lineinfile:
+    path:   /etc/postfix/main.cf
+    regexp: "(#)?{{ item.key }}(  *)?=.*"
+    line:   "{{ item.key }} = {{ item.value if item.value is string else item.value|join(', ') }}"
+  loop: "{{ opendkim_postfix_settings | dict2items }}"
+  notify: Restart postfix
+
+- name: Add user 'postfix' to group 'opendkim'
+  user:
+    name: postfix
+    groups: opendkim
+    append: yes
