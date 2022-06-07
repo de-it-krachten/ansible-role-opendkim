@@ -9,6 +9,12 @@
     systemctl_alternative: False
   tasks:
 
+    - name: Create remote_tmp
+      file:
+        path: /root/.ansible/tmp
+        state: directory
+        mode: "0700"
+
     - name: Define molecule distro (Ubuntu)
       set_fact:
         molecule_distro: "{{ (ansible_distribution|lower) + (ansible_distribution_version|regex_replace('\\.')) }}"
@@ -56,6 +62,7 @@
         - name: Install default packages
           package:
             name:
+              - lsb-release
               - netbase
               - gnupg
               - ssh
