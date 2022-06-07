@@ -15,8 +15,8 @@ platforms:
     command: ${MOLECULE_DOCKER_COMMAND:-""}
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:ro
-    privileged: true
-    pre_build_image: true
+    privileged: True
+    pre_build_image: True
 
 provisioner:
   name: ansible

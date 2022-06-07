@@ -12,5 +12,18 @@ github:
 
 molecule:
   converge:
+    roles:
+      - cron
+      - openssl
+      - postfix
     vars:
+      postfix_ipv6: false
+      postfix_domain: example.com
+      postfix_fqdn: host.example.com
+      postfix_ssl_key: "{{ openssl_server_key }}"
+      postfix_ssl_chain: "{{ openssl_server_crt }}"
       opendkim_domain: example.com
+
+ci_templates:
+  requirements.yml:
+    force: false
