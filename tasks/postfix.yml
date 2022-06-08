@@ -1,10 +1,26 @@
 ---
 
+- name: Get current smtpd_milter setting
+  shell: |
+    grep "^smtpd_milter" /etc/postfix/main.cf | sed "s/.* = //"
+  changed_when: false
+  check_mode: false
+  register: _milters
+
+- name: Merge smtpd_milters
+  set_fact:
+    smtpd_milters: "{{ ( _milters.stdout.split(',') + [ opendkim_postfix_settings.smtpd_milters ] ) | unique }}"
+
 - name: Configuring postfix (main.cf)
   lineinfile:
-    path:   /etc/postfix/main.cf
+    path:   "/etc/postfix/main.cf"
     regexp: "^(#)?{{ item.key }}(\\s)?=.*"
-    line:   "{{ item.key }} = {{ (item.value|join(', ')) if item.value|type_debug == 'list' else item.value }}"
+    line: >-
+      {%- if item.key == 'smtpd_milters' -%}
+      {{ item.key }} = {{ smtpd_milters | join(',') }}
+      {%- else -%}
+      {{ item.key }} = {{ (item.value|join(', ')) if item.value|type_debug == 'list' else item.value }}
+      {%- endif -%}
   loop: "{{ opendkim_postfix_settings | dict2items }}"
   notify: Restart postfix
 
