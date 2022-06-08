@@ -25,3 +25,4 @@
 - name: Display DKIM record for DNS
   debug:
     msg: "v=DKIM1; k=rsa; p={{ _pubkey.stdout }}"
+  tags: molecule-idempotence-notest

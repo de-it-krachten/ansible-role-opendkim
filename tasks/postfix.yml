@@ -3,8 +3,8 @@
 - name: Configuring postfix (main.cf)
   lineinfile:
     path:   /etc/postfix/main.cf
-    regexp: "(#)?{{ item.key }}(  *)?=.*"
-    line:   "{{ item.key }} = {{ item.value if item.value is string else item.value|join(', ') }}"
+    regexp: "^(#)?{{ item.key }}(\\s)?=.*"
+    line:   "{{ item.key }} = {{ (item.value|join(', ')) if item.value|type_debug == 'list' else item.value }}"
   loop: "{{ opendkim_postfix_settings | dict2items }}"
   notify: Restart postfix
 
