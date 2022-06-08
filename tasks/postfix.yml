@@ -2,7 +2,10 @@
 
 - name: Get current smtpd_milter setting
   shell: |
+    set -o pipefail
     grep "^smtpd_milter" /etc/postfix/main.cf | sed "s/.* = //"
+  args:
+    executable: /bin/bash
   changed_when: false
   check_mode: false
   register: _milters
