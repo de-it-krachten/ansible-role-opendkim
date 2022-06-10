@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.1.0...v1.1.1) (2022-06-10)
+
+
+### Bug Fixes
+
+* merge multiple 'smtpd_milters' values ([fffc083](https://github.com/de-it-krachten/ansible-role-opendkim/commit/fffc0831d90becbf633fd02c2e0a9d86fd1897a1))
+
 # [1.1.0](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.0.0...v1.1.0) (2022-06-08)
 
 
