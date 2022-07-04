@@ -7,9 +7,6 @@ generic:
   role_description: |
     Install & manages OpenDKIM 
 
-github:
-  fail_fast: false
-
 molecule:
   converge:
     roles:
@@ -23,7 +20,8 @@ molecule:
       postfix_ssl_key: "{{ openssl_server_key }}"
       postfix_ssl_chain: "{{ openssl_server_crt }}"
       opendkim_domain: example.com
-
-ci_templates:
-  requirements.yml:
-    force: false
+  requirements:
+    roles_extra:
+      - cron
+      - openssl
+      - postfix
