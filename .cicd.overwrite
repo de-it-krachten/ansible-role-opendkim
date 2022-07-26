@@ -8,6 +8,9 @@ generic:
     Install & manages OpenDKIM 
 
 molecule:
+  prepare:
+    vars:
+      activate_epel: true
   converge:
     roles:
       - cron
