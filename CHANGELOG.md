@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.1.1...v1.2.0) (2022-07-28)
+
+
+### Features
+
+* Implement ansible-lint v6 support ([9592d39](https://github.com/de-it-krachten/ansible-role-opendkim/commit/9592d395007399a2ac78ed8006fac208e306d7d7))
+
 ## [1.1.1](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.1.0...v1.1.1) (2022-06-10)
 
 
