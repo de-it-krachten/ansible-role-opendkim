@@ -20,12 +20,12 @@ opendkim_group: opendkim
 opendkim_settings:
   Mode: sv
   Selector: key
-  ReportAddress:      '"{{ opendkim_domain }} postmaster" <postmaster@{{ opendkim_domain }}>'
-  KeyTable:           '/etc/opendkim/KeyTable'
-  SigningTable:       'refile:/etc/opendkim/SigningTable'
+  ReportAddress: '"{{ opendkim_domain }} postmaster" <postmaster@{{ opendkim_domain }}>'
+  KeyTable: '/etc/opendkim/KeyTable'
+  SigningTable: 'refile:/etc/opendkim/SigningTable'
   ExternalIgnoreList: 'refile:/etc/opendkim/TrustedHosts'
-  InternalHosts:      'refile:/etc/opendkim/TrustedHosts'
-  Socket:             'inet:8891@localhost'
+  InternalHosts: 'refile:/etc/opendkim/TrustedHosts'
+  Socket: 'inet:8891@localhost'
 
 opendkim_postfix_settings:
   milter_default_action: accept

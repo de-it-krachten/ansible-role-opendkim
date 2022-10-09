@@ -12,7 +12,7 @@
     opendkim_domain: example.com
   pre_tasks:
     - name: Create 'remote_tmp'
-      file:
+      ansible.builtin.file:
         path: /root/.ansible/tmp
         state: directory
         mode: "0700"
@@ -22,5 +22,5 @@
     - postfix
   tasks:
     - name: Include role 'ansible-role-opendkim'
-      include_role:
+      ansible.builtin.include_role:
         name: ansible-role-opendkim
