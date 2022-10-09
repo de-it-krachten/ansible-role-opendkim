@@ -1,11 +1,11 @@
 ---
 
 - name: Install all packages
-  package:
+  ansible.builtin.package:
     name: "{{ opendkim_packages }}"
     state: present
 
 - name: Enable service
-  service:
+  ansible.builtin.service:
     name: opendkim
     enabled: yes

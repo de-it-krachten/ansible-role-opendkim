@@ -1,7 +1,7 @@
 ---
 
-- name: configure OpenDKIM setttings
-  lineinfile:
+- name: Configure OpenDKIM setttings
+  ansible.builtin.lineinfile:
     path: /etc/opendkim.conf
     line: "{{ item.key }} {{ item.value }}"
     regexp: "{{ item.key }}(\\s)+.*"
@@ -9,14 +9,14 @@
   notify: Restart opendkim
 
 - name: Disable KeyFile
-  replace:
+  ansible.builtin.replace:
     path: /etc/opendkim.conf
     replace: "#KeyFile"
     regexp: "^KeyFile"
   notify: Restart opendkim
 
 - name: Create /etc/opendkim/keys
-  file:
+  ansible.builtin.file:
     path: /etc/opendkim/keys
     state: directory
     owner: root
@@ -26,7 +26,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: Configure default for Debian
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/default/opendkim
     line: "Socket  inet:8891@localhost"
     regexp: "Socket .*"
@@ -37,7 +37,7 @@
   when: ansible_os_family == 'Debian'
 
 - name: Setup KeyTable
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/opendkim/KeyTable
     line: "key._domainkey.{{ item }}     {{ item }}:key:{{ opendkim_private_key }}"
     create: yes
@@ -48,7 +48,7 @@
   notify: Restart opendkim
 
 - name: Setup SigningTable
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/opendkim/SigningTable
     line: "*@{{ item }} key._domainkey.{{ item }}"
     create: yes
@@ -59,7 +59,7 @@
   notify: Restart opendkim
 
 - name: Setup TrustedHosts
-  lineinfile:
+  ansible.builtin.lineinfile:
     path: /etc/opendkim/TrustedHosts
     line: "*.{{ item }}"
     create: yes
@@ -70,7 +70,7 @@
   notify: Restart opendkim
 
 - name: Create private key
-  openssl_privatekey:
+  community.crypto.openssl_privatekey:
     path: "{{ opendkim_private_key }}"
     size: "{{ opendkim_key_bits }}"
     owner: "{{ opendkim_user }}"
@@ -78,7 +78,7 @@
   notify: Restart opendkim
 
 - name: Extract public key from private key
-  openssl_publickey:
+  community.crypto.openssl_publickey:
     path: "{{ opendkim_public_key }}"
     privatekey_path: "{{ opendkim_private_key }}"
     owner: "{{ opendkim_user }}"
@@ -86,7 +86,7 @@
   notify: Restart opendkim
 
 - name: Convert public key
-  shell: |
+  ansible.builtin.shell: |
     set -o pipefail
     sed "/PUBLIC/d" {{ opendkim_public_key }} | tr -d '\n'
   args:
