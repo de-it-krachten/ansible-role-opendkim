@@ -6,6 +6,16 @@
 Install & manages OpenDKIM 
 
 
+
+## Dependencies
+
+#### Roles
+None
+
+#### Collections
+- community.general
+- community.crypto
+
 ## Platforms
 
 Supported platforms
@@ -40,7 +50,7 @@ opendkim_private_key: /etc/opendkim/keys/dkim.private.key
 opendkim_public_key: /etc/opendkim/keys/dkim.public.key
 
 # List of domain
-opendkim_domains: "{{ [ opendkim_domain ] }}"
+opendkim_domains: "{{ [opendkim_domain] }}"
 
 # Private key bits
 opendkim_key_bits: 1024
@@ -66,6 +76,7 @@ opendkim_postfix_settings:
   smtpd_milters: 'inet:127.0.0.1:8891'
   non_smtpd_milters: $smtpd_milters
 </pre></code>
+
 
 ### vars/family-RedHat.yml
 <pre><code>
@@ -104,7 +115,7 @@ opendkim_packages:
     opendkim_domain: example.com
   pre_tasks:
     - name: Create 'remote_tmp'
-      file:
+      ansible.builtin.file:
         path: /root/.ansible/tmp
         state: directory
         mode: "0700"
@@ -114,6 +125,6 @@ opendkim_packages:
     - postfix
   tasks:
     - name: Include role 'opendkim'
-      include_role:
+      ansible.builtin.include_role:
         name: opendkim
 </pre></code>
