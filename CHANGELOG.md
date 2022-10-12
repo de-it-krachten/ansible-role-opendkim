@@ -1,3 +1,11 @@
+# [1.3.0](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.2.0...v1.3.0) (2022-10-12)
+
+
+### Features
+
+* Move to FQCN ([f0f9bdf](https://github.com/de-it-krachten/ansible-role-opendkim/commit/f0f9bdf03933ec524f5c2cc7de122070f7029eee))
+* Update CI to latest standards ([bd34116](https://github.com/de-it-krachten/ansible-role-opendkim/commit/bd34116091a819e19fabab391ba2749364c8eab6))
+
 # [1.2.0](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.1.1...v1.2.0) (2022-07-28)
 
 
