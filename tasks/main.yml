@@ -1,7 +1,7 @@
 ---
 
 - name: Load variables based on OS type
-  include_vars: "{{ lookup('first_found', params) }}"
+  ansible.builtin.include_vars: "{{ lookup('first_found', params) }}"
   vars:
     params:
       files:
@@ -14,15 +14,18 @@
         - "vars"
 
 - name: Assertions
-  assert:
+  ansible.builtin.assert:
     that:
       - opendkim_domain is defined
 
-- include_tasks: install.yml
-- include_tasks: config.yml
-- include_tasks: postfix.yml
+- name: Include install.yml
+  ansible.builtin.include_tasks: install.yml
+- name: Include config.yml
+  ansible.builtin.include_tasks: config.yml
+- name: Include postfix.yml
+  ansible.builtin.include_tasks: postfix.yml
 
 - name: Display DKIM record for DNS
-  debug:
+  ansible.builtin.debug:
     msg: "v=DKIM1; k=rsa; p={{ _pubkey.stdout }}"
   tags: molecule-idempotence-notest

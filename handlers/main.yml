@@ -1,11 +1,11 @@
 ---
 
 - name: Restart opendkim
-  service:
+  ansible.builtin.service:
     name: opendkim
     state: restarted
 
 - name: Restart postfix
-  service:
+  ansible.builtin.service:
     name: postfix
     state: restarted
