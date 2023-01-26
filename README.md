@@ -115,9 +115,9 @@ opendkim_packages:
     postfix_ssl_chain: "{{ openssl_server_crt }}"
     opendkim_domain: example.com
   roles:
-    - cron
-    - openssl
-    - postfix
+    - deitkrachten.cron
+    - deitkrachten.openssl
+    - deitkrachten.postfix
   tasks:
     - name: Include role 'opendkim'
       ansible.builtin.include_role:

@@ -13,9 +13,9 @@ molecule:
       activate_epel: true
   converge:
     roles:
-      - cron
-      - openssl
-      - postfix
+      - deitkrachten.cron
+      - deitkrachten.openssl
+      - deitkrachten.postfix
     vars:
       postfix_ipv6: false
       postfix_domain: example.com
@@ -25,6 +25,6 @@ molecule:
       opendkim_domain: example.com
   requirements:
     roles_extra:
-      - cron
-      - openssl
-      - postfix
+      - deitkrachten.cron
+      - deitkrachten.openssl
+      - deitkrachten.postfix
