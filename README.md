@@ -79,14 +79,14 @@ opendkim_postfix_settings:
 </pre></code>
 
 
-### vars/family-RedHat.yml
+### vars/family-Debian.yml
 <pre><code>
 opendkim_packages:
   - opendkim
   - opendkim-tools
 </pre></code>
 
-### vars/family-Debian.yml
+### vars/family-RedHat.yml
 <pre><code>
 opendkim_packages:
   - opendkim
