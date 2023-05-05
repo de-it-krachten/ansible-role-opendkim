@@ -27,6 +27,7 @@ Supported platforms
 - RockyLinux 8
 - RockyLinux 9
 - OracleLinux 8
+- OracleLinux 9
 - AlmaLinux 8
 - AlmaLinux 9
 - Debian 10 (Buster)
@@ -34,8 +35,8 @@ Supported platforms
 - Ubuntu 18.04 LTS
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 35
 - Fedora 36
+- Fedora 37
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
@@ -63,12 +64,12 @@ opendkim_group: opendkim
 opendkim_settings:
   Mode: sv
   Selector: key
-  ReportAddress:      '"{{ opendkim_domain }} postmaster" <postmaster@{{ opendkim_domain }}>'
-  KeyTable:           '/etc/opendkim/KeyTable'
-  SigningTable:       'refile:/etc/opendkim/SigningTable'
+  ReportAddress: '"{{ opendkim_domain }} postmaster" <postmaster@{{ opendkim_domain }}>'
+  KeyTable: '/etc/opendkim/KeyTable'
+  SigningTable: 'refile:/etc/opendkim/SigningTable'
   ExternalIgnoreList: 'refile:/etc/opendkim/TrustedHosts'
-  InternalHosts:      'refile:/etc/opendkim/TrustedHosts'
-  Socket:             'inet:8891@localhost'
+  InternalHosts: 'refile:/etc/opendkim/TrustedHosts'
+  Socket: 'inet:8891@localhost'
 
 opendkim_postfix_settings:
   milter_default_action: accept
@@ -78,14 +79,14 @@ opendkim_postfix_settings:
 </pre></code>
 
 
-### vars/family-RedHat.yml
+### vars/family-Debian.yml
 <pre><code>
 opendkim_packages:
   - opendkim
   - opendkim-tools
 </pre></code>
 
-### vars/family-Debian.yml
+### vars/family-RedHat.yml
 <pre><code>
 opendkim_packages:
   - opendkim
@@ -105,7 +106,7 @@ opendkim_packages:
 <pre><code>
 - name: sample playbook for role 'opendkim'
   hosts: all
-  become: "{{ molecule['converge']['become'] | default('yes') }}"
+  become: "yes"
   vars:
     postfix_ipv6: False
     postfix_domain: example.com
@@ -113,16 +114,10 @@ opendkim_packages:
     postfix_ssl_key: "{{ openssl_server_key }}"
     postfix_ssl_chain: "{{ openssl_server_crt }}"
     opendkim_domain: example.com
-  pre_tasks:
-    - name: Create 'remote_tmp'
-      ansible.builtin.file:
-        path: /root/.ansible/tmp
-        state: directory
-        mode: "0700"
   roles:
-    - cron
-    - openssl
-    - postfix
+    - deitkrachten.cron
+    - deitkrachten.openssl
+    - deitkrachten.postfix
   tasks:
     - name: Include role 'opendkim'
       ansible.builtin.include_role:
