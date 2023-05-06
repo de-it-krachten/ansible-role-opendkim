@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.3.0...v1.4.0) (2023-05-06)
+
+
+### Features
+
+* Move to namespaced role names ([5057238](https://github.com/de-it-krachten/ansible-role-opendkim/commit/50572389ec956fc4eb11589382e7d3483ceeef4c))
+
 # [1.3.0](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.2.0...v1.3.0) (2022-10-12)
 
 
