@@ -30,13 +30,13 @@ Supported platforms
 - OracleLinux 9
 - AlmaLinux 8
 - AlmaLinux 9
-- Debian 10 (Buster)
+- Debian 10 (Buster)<sup>1</sup>
 - Debian 11 (Bullseye)
-- Ubuntu 18.04 LTS
+- Debian 12 (Bookworm)
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 36
 - Fedora 37
+- Fedora 38
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
@@ -78,26 +78,33 @@ opendkim_postfix_settings:
   non_smtpd_milters: $smtpd_milters
 </pre></code>
 
-
-### vars/family-Debian.yml
+### defaults/family-Debian.yml
 <pre><code>
 opendkim_packages:
   - opendkim
   - opendkim-tools
 </pre></code>
 
-### vars/family-RedHat.yml
+### defaults/family-Suse.yml
 <pre><code>
 opendkim_packages:
   - opendkim
   - opendkim-tools
 </pre></code>
 
-### vars/family-RedHat-7.yml
+### defaults/family-RedHat.yml
+<pre><code>
+opendkim_packages:
+  - opendkim
+  - opendkim-tools
+</pre></code>
+
+### defaults/family-RedHat-7.yml
 <pre><code>
 opendkim_packages:
   - opendkim
 </pre></code>
+
 
 
 
