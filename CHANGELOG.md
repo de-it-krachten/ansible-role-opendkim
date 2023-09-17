@@ -1,3 +1,10 @@
+# [1.5.0](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.4.0...v1.5.0) (2023-09-17)
+
+
+### Features
+
+* Update supported platforms & CI ([33f83f1](https://github.com/de-it-krachten/ansible-role-opendkim/commit/33f83f118245c116f58a0a9b94965e040970d9be))
+
 # [1.4.0](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.3.0...v1.4.0) (2023-05-06)
 
 
