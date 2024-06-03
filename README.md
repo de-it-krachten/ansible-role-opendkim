@@ -13,7 +13,6 @@ Install & manages OpenDKIM
 None
 
 #### Collections
-- community.general
 - community.crypto
 
 ## Platforms
@@ -30,13 +29,13 @@ Supported platforms
 - OracleLinux 9
 - AlmaLinux 8
 - AlmaLinux 9
-- Debian 10 (Buster)<sup>1</sup>
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 37
-- Fedora 38
+- Ubuntu 24.04 LTS
+- Fedora 39
+- Fedora 40
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
@@ -85,11 +84,10 @@ opendkim_packages:
   - opendkim-tools
 </pre></code>
 
-### defaults/family-Suse.yml
+### defaults/family-RedHat-7.yml
 <pre><code>
 opendkim_packages:
   - opendkim
-  - opendkim-tools
 </pre></code>
 
 ### defaults/family-RedHat.yml
@@ -99,10 +97,11 @@ opendkim_packages:
   - opendkim-tools
 </pre></code>
 
-### defaults/family-RedHat-7.yml
+### defaults/family-Suse.yml
 <pre><code>
 opendkim_packages:
   - opendkim
+  - opendkim-tools
 </pre></code>
 
 
@@ -113,13 +112,13 @@ opendkim_packages:
 <pre><code>
 - name: sample playbook for role 'opendkim'
   hosts: all
-  become: "yes"
+  become: 'yes'
   vars:
-    postfix_ipv6: False
+    postfix_ipv6: false
     postfix_domain: example.com
     postfix_fqdn: host.example.com
-    postfix_ssl_key: "{{ openssl_server_key }}"
-    postfix_ssl_chain: "{{ openssl_server_crt }}"
+    postfix_ssl_key: '{{ openssl_server_key }}'
+    postfix_ssl_chain: '{{ openssl_server_crt }}'
     opendkim_domain: example.com
   roles:
     - deitkrachten.cron
