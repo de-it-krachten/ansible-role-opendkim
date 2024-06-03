@@ -1,3 +1,10 @@
+# [1.6.0](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.5.0...v1.6.0) (2024-06-03)
+
+
+### Features
+
+* Add support for Ubuntu 24.04 LTS + Fedora 40 ([991a934](https://github.com/de-it-krachten/ansible-role-opendkim/commit/991a9346c5f830de66142a8831ce006db864a62c))
+
 # [1.5.0](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.4.0...v1.5.0) (2023-09-17)
 
 
