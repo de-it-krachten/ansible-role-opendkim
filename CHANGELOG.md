@@ -1,3 +1,14 @@
+# [1.8.0](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.7.0...v1.8.0) (2025-08-06)
+
+
+### Features
+
+* Add support for AlmaLinux 10 ([39e8895](https://github.com/de-it-krachten/ansible-role-opendkim/commit/39e88955cd3ed93557d8e726526fd4b5b05011a2))
+* Add support for Debian 13 (Trixie) ([6eff58e](https://github.com/de-it-krachten/ansible-role-opendkim/commit/6eff58e71318a5d4480955a7bae32de7a43514ad))
+* Add support for OracleLinux 10 ([cdc5a3e](https://github.com/de-it-krachten/ansible-role-opendkim/commit/cdc5a3e0224855ce83cf287f9ff02950032ad22e))
+* Add support for Red Hat Enterprise Linux 10 ([000681d](https://github.com/de-it-krachten/ansible-role-opendkim/commit/000681d60c32a3311a201bfe33c76e8108691430))
+* Add support for RockyLinux 10 ([87c063b](https://github.com/de-it-krachten/ansible-role-opendkim/commit/87c063bd75d929792f259e723ba873a9b577598b))
+
 # [1.7.0](https://github.com/de-it-krachten/ansible-role-opendkim/compare/v1.6.0...v1.7.0) (2024-12-29)
 
 
