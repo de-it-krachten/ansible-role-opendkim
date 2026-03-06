@@ -7,15 +7,13 @@ generic:
   role_description: |
     Install & manages OpenDKIM 
 
-# Platforms
+# Supported platforms
 platforms:
-  opensuse15:
-    ci: false
-    supported: false
-  sles15:
-    ci: false
-    supported: false
+  ubuntu2004:
+    supported: true
+    ci: true
 
+# Platforms
 # Molecule
 molecule:
   prepare:
