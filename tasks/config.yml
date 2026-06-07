@@ -23,7 +23,7 @@
     group: "{{ opendkim_group }}"
     mode: "0750"
   notify: Restart opendkim
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts.os_family == 'Debian'
 
 - name: Configure default for Debian
   ansible.builtin.lineinfile:
@@ -34,7 +34,7 @@
     group: "{{ opendkim_group }}"
     mode: "0644"
   notify: Restart opendkim
-  when: ansible_os_family == 'Debian'
+  when: ansible_facts.os_family == 'Debian'
 
 - name: Setup KeyTable
   ansible.builtin.lineinfile:
